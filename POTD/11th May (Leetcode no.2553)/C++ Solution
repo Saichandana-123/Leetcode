@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> separateDigits(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans;
+        for(int i=n-1;i>=0;i--){
+            int num = nums[i];
+            while(num!=0){
+                int temp = num%10;
+                ans.push_back(temp);
+                num = num/10;
+            }
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
+/* Time Complexity : O(nlogM) , n = no.of integers in nums and M is maximum number in nums
+   Space complexity : O(1)
+*/
