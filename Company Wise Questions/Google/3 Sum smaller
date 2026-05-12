@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    int twoSumSmaller(int sum,vector<int>& arr,int start){
+         int n = arr.size();
+         int left = start;
+         int right = n-1;
+         int count = 0;
+         while(left<right){
+             if(arr[left]+arr[right] < sum){
+                 count += right - left;
+                 left++;
+             }
+             else{
+                 right--;
+             }
+         }
+         return count;
+    }
+    int countTriplets(int sum, vector<int>& arr) {
+        // code here
+        int n = arr.size();
+        int count = 0;
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<n-2;i++){
+            count += twoSumSmaller(sum-arr[i],arr,i+1);
+        }
+       return count; 
+    }
+};
+// Time complexity : O(n^2)
+// Space complexity : O(1)
