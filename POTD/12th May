@@ -1,0 +1,38 @@
+// Method 1 - Descending Differences 
+class Solution {
+public:
+    int minimumEffort(vector<vector<int>>& tasks) {
+        sort(tasks.begin(),tasks.end(),[&](vector<int>&a ,vector<int>& b){
+                          return a[1]-a[0] > b[1]-b[0];    
+        });
+        int initial =0;
+        int remain = 0;
+        for(auto task : tasks){
+            if(remain > task[1]){
+                initial += 0;
+                remain = remain - task[0];
+            }
+            else{
+                initial += task[1]-remain;
+                remain = task[1]-task[0];
+            }
+        }
+        return initial;
+    }
+};
+// Method 2 - Ascending Differences
+class Solution {
+public:
+    int minimumEffort(vector<vector<int>>& tasks) {
+        sort(tasks.begin(), tasks.end(), [&](vector<int>& a, vector<int>& b) {
+            return a[1] - a[0] < b[1] - b[0];
+        });
+        int ans = 0;
+        for (auto task : tasks) {
+            ans = max(ans + task[0], task[1]);
+        }
+        return ans;
+    }
+};
+// Time Complexity : O(nlogn) and space complexity : O(logn)
+// TC and SC is same in both methods 
